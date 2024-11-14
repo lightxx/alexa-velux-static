@@ -1,6 +1,5 @@
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const code = document.getElementById('code').value;
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
@@ -12,7 +11,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ code, username, password })
+            body: JSON.stringify({ username, password })
         });
 
         const responseData = await response.json();
@@ -93,16 +92,26 @@ function displayHomeInfo(homes) {
     homeInfoContainer.style.display = 'block';
 }
 
-
 document.addEventListener('DOMContentLoaded', function () {
     const disclaimerCheckbox = document.getElementById('disclaimerCheckbox');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
     const submitButton = document.getElementById('submitButton');
 
-    disclaimerCheckbox.addEventListener('change', function () {
-        if (disclaimerCheckbox.checked) {
-            submitButton.disabled = false; 
+    function checkConditions() {
+        if (
+            usernameInput.value.trim() !== '' &&
+            passwordInput.value.trim() !== '' &&
+            disclaimerCheckbox.checked
+        ) {
+            submitButton.disabled = false; // Enable the submit button
         } else {
-            submitButton.disabled = true;  
+            submitButton.disabled = true; // Disable the submit button
         }
+    }
+
+    [disclaimerCheckbox, usernameInput, passwordInput].forEach(element => {
+        element.addEventListener('input', checkConditions);
+        element.addEventListener('change', checkConditions);
     });
 });

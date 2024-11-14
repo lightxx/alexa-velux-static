@@ -94,3 +94,15 @@ function displayHomeInfo(homes) {
 }
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    const disclaimerCheckbox = document.getElementById('disclaimerCheckbox');
+    const submitButton = document.getElementById('submitButton');
+
+    disclaimerCheckbox.addEventListener('change', function () {
+        if (disclaimerCheckbox.checked) {
+            submitButton.disabled = false; 
+        } else {
+            submitButton.disabled = true;  
+        }
+    });
+});

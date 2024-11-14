@@ -94,12 +94,16 @@ function displayHomeInfo(homes) {
 
 document.addEventListener('DOMContentLoaded', function () {
     const disclaimerCheckbox = document.getElementById('disclaimerCheckbox');
+    const codeInput = document.getElementById('code');
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
     const submitButton = document.getElementById('submitButton');
 
+    // Function to check all conditions
     function checkConditions() {
+        // Check if all inputs are filled and checkbox is checked
         if (
+            codeInput.value.trim() !== '' &&
             usernameInput.value.trim() !== '' &&
             passwordInput.value.trim() !== '' &&
             disclaimerCheckbox.checked
@@ -110,7 +114,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    [disclaimerCheckbox, usernameInput, passwordInput].forEach(element => {
+    // Add event listeners to inputs and checkbox to check conditions
+    [disclaimerCheckbox, codeInput, usernameInput, passwordInput].forEach(element => {
         element.addEventListener('input', checkConditions);
         element.addEventListener('change', checkConditions);
     });

@@ -6,7 +6,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     document.getElementById('loadingSpinner').style.display = 'block';
 
     try {
-        const response = await fetch('https://g255fhmrt4stqqnkcpzt7e2ode0kivdb.lambda-url.eu-west-1.on.aws/register_user/', {
+        const response = await fetch('https://g255fhmrt4stqqnkcpzt7e2ode0kivdb.lambda-url.eu-west-1.on.aws/register_user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -23,9 +23,20 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         document.getElementById('loadingSpinner').style.display = 'none';
         modal.show();
 
-        if (response.ok && responseData.homeInfo) {
-            const homeInfo = JSON.parse(responseData.homeInfo);
-            displayHomeInfo(homeInfo.body.homes);
+        if (response.ok) {
+            const closeButton = document.getElementById('closeButton');
+            closeButton.disabled = false;
+
+            const redirectUrl = queryParams.redirect_uri;
+
+            closeButton.addEventListener('click', () => {
+                window.location.href = redirectUrl;
+            });
+
+            if (responseData.homeInfo) {
+                const homeInfo = JSON.parse(responseData.homeInfo);
+                displayHomeInfo(homeInfo.body.homes);
+            }
         }
     } catch (error) {
         document.getElementById('loadingSpinner').style.display = 'none';
@@ -34,6 +45,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         failureModal.show();
     }
 });
+
 
 function displayHomeInfo(homes) {
     const homeInfoContainer = document.getElementById('homeInfoContainer');

@@ -1,7 +1,7 @@
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const velux_user_id = document.getElementById('username').value;
+    const velux_password = document.getElementById('password').value;
 
     document.getElementById('loadingSpinner').style.display = 'block';
 
@@ -11,7 +11,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ velux_user_id, velux_password })
         });
 
         const responseData = await response.json();

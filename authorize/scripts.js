@@ -6,7 +6,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     document.getElementById('loadingSpinner').style.display = 'block';
 
     try {
-        const response = await fetch('https://exeryth7p5v4pukq2nc75ffwha0iucne.lambda-url.eu-west-1.on.aws/', {
+        const response = await fetch('https://g255fhmrt4stqqnkcpzt7e2ode0kivdb.lambda-url.eu-west-1.on.aws/register_user/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -94,26 +94,38 @@ function displayHomeInfo(homes) {
 
 document.addEventListener('DOMContentLoaded', function () {
     const disclaimerCheckbox = document.getElementById('disclaimerCheckbox');
-    const codeInput = document.getElementById('code');
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
     const submitButton = document.getElementById('submitButton');
 
     function checkConditions() {
         if (
-            codeInput.value.trim() !== '' &&
             usernameInput.value.trim() !== '' &&
             passwordInput.value.trim() !== '' &&
             disclaimerCheckbox.checked
         ) {
             submitButton.disabled = false; 
         } else {
-            submitButton.disabled = true; 
+            submitButton.disabled = true;
         }
     }
 
-    [disclaimerCheckbox, codeInput, usernameInput, passwordInput].forEach(element => {
+    [disclaimerCheckbox, usernameInput, passwordInput].forEach(element => {
         element.addEventListener('input', checkConditions);
         element.addEventListener('change', checkConditions);
     });
 });
+
+let queryParams = {};
+
+window.onload = () => {
+    const queryString = window.location.search;
+  
+    const params = new URLSearchParams(queryString);
+  
+    params.forEach((value, key) => {
+      queryParams[key] = value;
+    });
+  
+    console.log(queryParams);
+  };

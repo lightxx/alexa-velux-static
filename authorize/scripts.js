@@ -30,7 +30,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
             closeButton.classList.remove('disabled'); 
             closeButton.classList.add('btn-primary'); 
 
-            const redirectUrl = queryParams.redirect_uri;
+            const redirectUrl = queryParams.redirect_uri + "?state=" + encodeURIComponent(queryParams.state) + "&code=" + responseData.message.code;
 
             closeButton.addEventListener('click', () => {
                 window.location.href = redirectUrl;

@@ -18,7 +18,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         const modal = new bootstrap.Modal(response.ok ? document.getElementById('successModal') : document.getElementById('failureModal'));
 
         const messageElement = response.ok ? document.getElementById('successMessage') : document.getElementById('failureMessage');
-        messageElement.textContent = response.ok ? "Account successfully linked!" : "Failed to link account. Please try again.";
+        messageElement.textContent = (response.ok ? "Account successfully linked!" : "Failed to link account. Please try again.");
 
         document.getElementById('loadingSpinner').style.display = 'none';
         modal.show();
@@ -34,8 +34,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
             });
 
             if (responseData.homeInfo) {
-                const homeInfo = JSON.parse(responseData.homeInfo);
-                displayHomeInfo(homeInfo.body.homes);
+                displayHomeInfo(responseData.homeInfo.body.homes);
             }
         }
     } catch (error) {

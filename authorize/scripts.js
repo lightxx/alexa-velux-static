@@ -26,6 +26,9 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         if (response.ok) {
             const closeButton = document.getElementById('closeButton');
             closeButton.disabled = false;
+            closeButton.removeAttribute('disabled');
+            closeButton.classList.remove('disabled'); 
+            closeButton.classList.add('btn-primary'); 
 
             const redirectUrl = queryParams.redirect_uri;
 
